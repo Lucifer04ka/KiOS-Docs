@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kernel — KiOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">KiOS</span>
+            </a>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Docs</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Documentation</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="nav-group-title">Getting Started</span>
+                    <a href="index.html" class="nav-item">Introduction</a>
+                    <a href="quick-start.html" class="nav-item">Quick Start</a>
+                    <a href="installation.html" class="nav-item">Installation</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Architecture</span>
+                    <a href="overview.html" class="nav-item">Overview</a>
+                    <a href="kernel.html" class="nav-item active">Kernel</a>
+                    <a href="memory.html" class="nav-item">Memory Management</a>
+                    <a href="syscalls.html" class="nav-item">System Calls</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Development</span>
+                    <a href="roadmap.html" class="nav-item">Roadmap</a>
+                    <a href="contributing.html" class="nav-item">Contributing</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Future Plans</span>
+                    <a href="kilang.html" class="nav-item">KiLang</a>
+                    <a href="file-formats.html" class="nav-item">File Formats</a>
+                    <a href="kifs.html" class="nav-item">KiFS</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <article class="article">
+                <h1>Kernel</h1>
+                <p class="lead">The KiOS kernel is a 64-bit microkernel written in C.</p>
+
+                <h2 id="structure">Directory Structure</h2>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Tree</span>
+                    </div>
+                    <pre><code>src/
+├── kernel/           # Main kernel entry
+├── arch/x86_64/    # x86_64 architecture
+│   ├── gdt/        # Global Descriptor Table
+│   ├── idt/        # Interrupt Descriptor Table
+│   └── paging/     # Virtual Memory
+├── mm/             # Memory Management
+├── driver/         # Device Drivers
+├── fs/             # File Systems
+├── gui/            # Graphics
+└── syscall/       # System Calls</code></pre>
+                </div>
+
+                <h2 id="boot">Boot Process</h2>
+                <ol>
+                    <li>Limine bootloader loads kernel</li>
+                    <li>GDT initialization</li>
+                    <li>IDT initialization</li>
+                    <li>PMM initialization</li>
+                    <li>Heap initialization</li>
+                    <li>VMM initialization (in progress)</li>
+                    <li>Shell startup</li>
+                </ol>
+
+                <h2 id="components">Kernel Components</h2>
+
+                <h3>GDT (Global Descriptor Table)</h3>
+                <p>Sets up 64-bit segment descriptors for kernel and user mode.</p>
+
+                <h3>IDT (Interrupt Descriptor Table)</h3>
+                <p>Handles hardware interrupts and exceptions.</p>
+
+                <h3>PMM (Physical Memory Manager)</h3>
+                <p>Bitmap-based allocator for physical memory pages.</p>
+
+                <h3>Heap</h3>
+                <p>Dynamic memory allocation for kernel use.</p>
+
+                <h3>VMM (Virtual Memory Manager)</h3>
+                <p>4-level paging (PML4 → PDPT → PD → PT). Currently in development.</p>
+
+                <h2 id="source">Source Code</h2>
+                <p>The main kernel entry point:</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">C</span>
+                    </div>
+                    <pre><code>void _start(void) {
+    // Initialize hardware
+    gdt_init();
+    idt_init();
+    
+    // Initialize memory
+    pmm_init(&memmap_request, hhdm_offset);
+    heap_init(hhdm_offset);
+    
+    // Start shell
+    for (;;) asm("hlt");
+}</code></pre>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

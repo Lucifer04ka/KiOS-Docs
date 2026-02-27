@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Management — KiOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">KiOS</span>
+            </a>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Docs</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Documentation</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="nav-group-title">Getting Started</span>
+                    <a href="index.html" class="nav-item">Introduction</a>
+                    <a href="quick-start.html" class="nav-item">Quick Start</a>
+                    <a href="installation.html" class="nav-item">Installation</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Architecture</span>
+                    <a href="overview.html" class="nav-item">Overview</a>
+                    <a href="kernel.html" class="nav-item">Kernel</a>
+                    <a href="memory.html" class="nav-item active">Memory Management</a>
+                    <a href="syscalls.html" class="nav-item">System Calls</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Development</span>
+                    <a href="roadmap.html" class="nav-item">Roadmap</a>
+                    <a href="contributing.html" class="nav-item">Contributing</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Future Plans</span>
+                    <a href="kilang.html" class="nav-item">KiLang</a>
+                    <a href="file-formats.html" class="nav-item">File Formats</a>
+                    <a href="kifs.html" class="nav-item">KiFS</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <article class="article">
+                <h1>Memory Management</h1>
+                <p class="lead">KiOS memory management subsystems.</p>
+
+                <h2 id="overview">Overview</h2>
+                <p>KiOS implements three levels of memory management:</p>
+                <ul>
+                    <li><strong>PMM:</strong> Physical Memory Manager</li>
+                    <li><strong>Heap:</strong> Dynamic allocation</li>
+                    <li><strong>VMM:</strong> Virtual Memory Manager</li>
+                </ul>
+
+                <h2 id="pmm">PMM — Physical Memory Manager</h2>
+                <p>Uses a bitmap to track physical memory pages.</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>pmm_init()</code></td>
+                                <td>Initialize PMM from Limine memory map</td>
+                            </tr>
+                            <tr>
+                                <td><code>pmm_alloc_page()</code></td>
+                                <td>Allocate one physical page</td>
+                            </tr>
+                            <tr>
+                                <td><code>pmm_free_page()</code></td>
+                                <td>Free one physical page</td>
+                            </tr>
+                            <tr>
+                                <td><code>pmm_get_free_memory()</code></td>
+                                <td>Get free RAM in bytes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="heap">Heap</h2>
+                <p>Simple bump allocator for kernel dynamic memory.</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>heap_init()</code></td>
+                                <td>Initialize heap</td>
+                            </tr>
+                            <tr>
+                                <td><code>kmalloc()</code></td>
+                                <td>Allocate memory</td>
+                            </tr>
+                            <tr>
+                                <td><code>kfree()</code></td>
+                                <td>Free memory (stub)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="vmm">VMM — Virtual Memory Manager</h2>
+                <p>Implements 4-level paging for x86_64:</p>
+
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>PML4</h3>
+                        <p>Page Map Level 4 (512 entries)</p>
+                    </div>
+                    <div class="feature">
+                        <h3>PDPT</h3>
+                        <p>Page Directory Pointer Table</p>
+                    </div>
+                    <div class="feature">
+                        <h3>PD</h3>
+                        <p>Page Directory</p>
+                    </div>
+                    <div class="feature">
+                        <h3>PT</h3>
+                        <p>Page Table</p>
+                    </div>
+                </div>
+
+                <h3>Page Flags</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Flag</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PTE_PRESENT</td>
+                                <td>0x001</td>
+                                <td>Page is present</td>
+                            </tr>
+                            <tr>
+                                <td>PTE_WRITABLE</td>
+                                <td>0x002</td>
+                                <td>Writable</td>
+                            </tr>
+                            <tr>
+                                <td>PTE_USER</td>
+                                <td>0x004</td>
+                                <td>User accessible</td>
+                            </tr>
+                            <tr>
+                                <td>PTE_NO_CACHE</td>
+                                <td>0x010</td>
+                                <td>Cache disabled</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="status">Current Status</h2>
+                <div class="warning-callout">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content">
+                        <strong>VMM is disabled</strong> due to stability issues. Work in progress.
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributing — KiOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">KiOS</span>
+            </a>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Docs</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Documentation</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="nav-group-title">Getting Started</span>
+                    <a href="index.html" class="nav-item">Introduction</a>
+                    <a href="quick-start.html" class="nav-item">Quick Start</a>
+                    <a href="installation.html" class="nav-item">Installation</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Architecture</span>
+                    <a href="overview.html" class="nav-item">Overview</a>
+                    <a href="kernel.html" class="nav-item">Kernel</a>
+                    <a href="memory.html" class="nav-item">Memory Management</a>
+                    <a href="syscalls.html" class="nav-item">System Calls</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Development</span>
+                    <a href="roadmap.html" class="nav-item">Roadmap</a>
+                    <a href="contributing.html" class="nav-item active">Contributing</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Future Plans</span>
+                    <a href="kilang.html" class="nav-item">KiLang</a>
+                    <a href="file-formats.html" class="nav-item">File Formats</a>
+                    <a href="kifs.html" class="nav-item">KiFS</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <article class="article">
+                <h1>Contributing</h1>
+                <p class="lead">How to contribute to KiOS development.</p>
+
+                <h2 id="ways">Ways to Contribute</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>🐛 Bug Reports</h3>
+                        <p>Report issues on GitHub</p>
+                    </div>
+                    <div class="feature">
+                        <h3>💡 Feature Ideas</h3>
+                        <p>Suggest new features</p>
+                    </div>
+                    <div class="feature">
+                        <h3>💻 Code</h3>
+                        <p>Implement features</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📝 Documentation</h3>
+                        <p>Improve docs</p>
+                    </div>
+                </div>
+
+                <h2 id="getting-started">Getting Started</h2>
+                <ol>
+                    <li>Fork the repository</li>
+                    <li>Clone your fork</li>
+                    <li>Create a feature branch</li>
+                    <li>Make changes</li>
+                    <li>Test thoroughly</li>
+                    <li>Submit a pull request</li>
+                </ol>
+
+                <h2 id="code-style">Code Style</h2>
+                <ul>
+                    <li>Use <strong>tabs</strong> for indentation</li>
+                    <li>Use <strong>C99</strong> standard</li>
+                    <li>Keep lines under <strong>100 characters</strong></li>
+                    <li>Add comments for <strong>complex code</strong></li>
+                </ul>
+
+                <h2 id="coding-standards">Coding Standards</h2>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">C</span>
+                    </div>
+                    <pre><code>// Good example
+void function_example(int parameter) {
+    if (parameter > 0) {
+        do_something();
+    }
+}</code></pre>
+                </div>
+
+                <h2 id="pull-requests">Pull Requests</h2>
+                <ul>
+                    <li>One feature per PR</li>
+                    <li>Describe what you changed</li>
+                    <li>Include tests if applicable</li>
+                    <li>Update documentation</li>
+                </ul>
+
+                <h2 id="communication">Communication</h2>
+                <p>For questions and discussions:</p>
+                <ul>
+                    <li>GitHub Issues</li>
+                    <li>GitHub Discussions</li>
+                </ul>
+
+                <h2 id="license">License</h2>
+                <p>KiOS is licensed under MIT License.</p>
+
+                <div class="note-callout">
+                    <span class="callout-icon">📝</span>
+                    <div class="callout-content">
+                        <strong>Thank you</strong> for your interest in contributing to KiOS!
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

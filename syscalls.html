@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Calls — KiOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">KiOS</span>
+            </a>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Docs</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Documentation</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="nav-group-title">Getting Started</span>
+                    <a href="index.html" class="nav-item">Introduction</a>
+                    <a href="quick-start.html" class="nav-item">Quick Start</a>
+                    <a href="installation.html" class="nav-item">Installation</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Architecture</span>
+                    <a href="overview.html" class="nav-item">Overview</a>
+                    <a href="kernel.html" class="nav-item">Kernel</a>
+                    <a href="memory.html" class="nav-item">Memory Management</a>
+                    <a href="syscalls.html" class="nav-item active">System Calls</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Development</span>
+                    <a href="roadmap.html" class="nav-item">Roadmap</a>
+                    <a href="contributing.html" class="nav-item">Contributing</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Future Plans</span>
+                    <a href="kilang.html" class="nav-item">KiLang</a>
+                    <a href="file-formats.html" class="nav-item">File Formats</a>
+                    <a href="kifs.html" class="nav-item">KiFS</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <article class="article">
+                <h1>System Calls</h1>
+                <p class="lead">Kernel API for user programs.</p>
+
+                <div class="warning-callout">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content">
+                        <strong>In Development:</strong> Syscall interface is currently being implemented.
+                    </div>
+                </div>
+
+                <h2 id="overview">Overview</h2>
+                <p>System calls (syscalls) provide the interface between user programs and the kernel.</p>
+
+                <h2 id="numbers">Syscall Numbers</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>SYS_READ</td>
+                                <td>Read from file descriptor</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>SYS_WRITE</td>
+                                <td>Write to file descriptor</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>SYS_OPEN</td>
+                                <td>Open file</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>SYS_CLOSE</td>
+                                <td>Close file descriptor</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>SYS_MMAP</td>
+                                <td>Memory map</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>SYS_MUNMAP</td>
+                                <td>Unmap memory</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>SYS_EXIT</td>
+                                <td>Exit process</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>SYS_GETPID</td>
+                                <td>Get process ID</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>SYS_BRK</td>
+                                <td>Change data segment size</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="file-descriptors">File Descriptors</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>FD</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>STDIN</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>STDOUT</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>STDERR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="mmap">Memory Mapping Flags</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Flag</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MAP_SHARED</td>
+                                <td>0x01</td>
+                            </tr>
+                            <tr>
+                                <td>MAP_PRIVATE</td>
+                                <td>0x02</td>
+                            </tr>
+                            <tr>
+                                <td>MAP_FIXED</td>
+                                <td>0x10</td>
+                            </tr>
+                            <tr>
+                                <td>MAP_ANONYMOUS</td>
+                                <td>0x20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="status">Implementation Status</h2>
+                <p>The following syscalls are partially implemented:</p>
+                <ul>
+                    <li>SYS_READ - stub</li>
+                    <li>SYS_WRITE - stub</li>
+                    <li>SYS_EXIT - functional</li>
+                    <li>SYS_GETPID - functional</li>
+                </ul>
+            </article>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview — KiOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">KiOS</span>
+            </a>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Docs</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Documentation</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="nav-group-title">Getting Started</span>
+                    <a href="index.html" class="nav-item">Introduction</a>
+                    <a href="quick-start.html" class="nav-item">Quick Start</a>
+                    <a href="installation.html" class="nav-item">Installation</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Architecture</span>
+                    <a href="overview.html" class="nav-item active">Overview</a>
+                    <a href="kernel.html" class="nav-item">Kernel</a>
+                    <a href="memory.html" class="nav-item">Memory Management</a>
+                    <a href="syscalls.html" class="nav-item">System Calls</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Development</span>
+                    <a href="roadmap.html" class="nav-item">Roadmap</a>
+                    <a href="contributing.html" class="nav-item">Contributing</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Future Plans</span>
+                    <a href="kilang.html" class="nav-item">KiLang</a>
+                    <a href="file-formats.html" class="nav-item">File Formats</a>
+                    <a href="kifs.html" class="nav-item">KiFS</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <article class="article">
+                <h1>System Architecture</h1>
+                <p class="lead">Overview of KiOS architecture and components.</p>
+
+                <h2 id="layers">Architecture Layers</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>User Space</h3>
+                        <p>Applications, shells, utilities</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Runtime</h3>
+                        <p>Standard library, KiLang runtime</p>
+                    </div>
+                    <div class="feature">
+                        <h3>System Calls</h3>
+                        <p>Kernel API interface</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Kernel</h3>
+                        <p>Memory, processes, drivers</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Hardware</h3>
+                        <p>CPU, RAM, storage, I/O</p>
+                    </div>
+                </div>
+
+                <h2 id="components">Core Components</h2>
+                
+                <h3>Bootloader</h3>
+                <p>KiOS uses <strong>Limine</strong> as its bootloader, supporting both UEFI and BIOS modes.</p>
+
+                <h3>Kernel</h3>
+                <p>The kernel is a 64-bit microkernel written in C with some assembly for critical sections.</p>
+
+                <h3>Memory Management</h3>
+                <ul>
+                    <li><strong>PMM:</strong> Physical Memory Manager (bitmap allocator)</li>
+                    <li><strong>VMM:</strong> Virtual Memory Manager (4-level paging)</li>
+                    <li><strong>Heap:</strong> Dynamic memory allocation</li>
+                </ul>
+
+                <h3>Device Drivers</h3>
+                <ul>
+                    <li>PS/2 Keyboard</li>
+                    <li>Framebuffer (VESA)</li>
+                    <li>AHCI/SATA (planned)</li>
+                    <li>PS/2 Mouse (planned)</li>
+                </ul>
+
+                <h2 id="filesystem">File System</h2>
+                <p>KiOS will use <strong>KiFS</strong> (KiOS File System), a custom journaling filesystem.</p>
+
+                <h2 id="graphics">Graphics</h2>
+                <p>Planned graphics stack:</p>
+                <ul>
+                    <li>Display Server</li>
+                    <li>Window Manager</li>
+                    <li>GUI Framework</li>
+                    <li>KiDesktop Environment</li>
+                </ul>
+
+                <h2 id="tech-stack">Technology Stack</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Technology</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Language</td>
+                                <td>C99, ASM (x86_64)</td>
+                            </tr>
+                            <tr>
+                                <td>Compiler</td>
+                                <td>GCC</td>
+                            </tr>
+                            <tr>
+                                <td>Bootloader</td>
+                                <td>Limine</td>
+                            </tr>
+                            <tr>
+                                <td>Emulator</td>
+                                <td>QEMU</td>
+                            </tr>
+                            <tr>
+                                <td>Target CPU</td>
+                                <td>x86_64</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
