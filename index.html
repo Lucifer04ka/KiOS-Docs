@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KiOS — Documentation</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
 </head>
 <body>
     <header class="site-header">
@@ -14,8 +13,9 @@
                 <span class="logo-icon">⚙️</span>
                 <span class="logo-text">KiOS</span>
             </a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             <nav class="top-nav">
-                <a href="index.html" class="nav-link active">Docs</a>
+                <a href="index.html" class="nav-link">Docs</a>
                 <a href="roadmap.html" class="nav-link">Roadmap</a>
                 <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
             </nav>
@@ -23,7 +23,7 @@
     </header>
 
     <div class="layout">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <span class="sidebar-title">Documentation</span>
             </div>
@@ -58,195 +58,73 @@
         <main class="main-content">
             <article class="article">
                 <h1>Introduction</h1>
-                <p class="lead">KiOS is an independent 64-bit operating system developed from scratch, aiming for Windows XP-level functionality.</p>
+                <p class="lead">KiOS is an independent 64-bit operating system developed from scratch.</p>
 
                 <div class="warning-callout">
                     <span class="callout-icon">⚠️</span>
                     <div class="callout-content">
-                        <strong>Warning:</strong> KiOS is currently in early development. Many features are not yet implemented.
+                        <strong>Warning:</strong> KiOS is in early development.
                     </div>
                 </div>
 
                 <h2 id="overview">Overview</h2>
-                <p>KiOS is a vertically-integrated computing environment designed with full control from transistors to high-level syntax. The project goal is complete autonomy:</p>
+                <p>KiOS - vertically-integrated computing environment:</p>
 
                 <ul>
-                    <li><strong>Kernel:</strong> 64-bit microkernel on C/ASM</li>
-                    <li><strong>Language:</strong> Custom programming language KiLang</li>
-                    <li><strong>File Formats:</strong> Proprietary binary formats</li>
-                    <li><strong>Filesystem:</strong> KiFS (KiOS File System)</li>
-                    <li><strong>Graphics:</strong> Native graphics server</li>
+                    <li><strong>Kernel:</strong> 64-bit microkernel</li>
+                    <li><strong>Language:</strong> KiLang (planned)</li>
+                    <li><strong>Filesystem:</strong> KiFS (planned)</li>
                 </ul>
 
                 <h2 id="features">Key Features</h2>
-
                 <div class="feature-grid">
                     <div class="feature">
-                        <h3>🖥️ Microkernel Architecture</h3>
-                        <p>Lightweight kernel with minimal code running in privileged mode. Device drivers run in userspace.</p>
+                        <h3>🖥️ Microkernel</h3>
+                        <p>Lightweight kernel</p>
                     </div>
                     <div class="feature">
                         <h3>🔒 Memory Protection</h3>
-                        <p>Virtual memory management with 4-level paging (PML4 → PDPT → PD → PT). Kernel and user space separation.</p>
+                        <p>4-level paging</p>
                     </div>
                     <div class="feature">
-                        <h3>💾 Custom Filesystem</h3>
-                        <p>KiFS (KiOS File System) with journaling, permissions, and optimized for HDD/SSD.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>🔤 Native Language</h3>
-                        <p>KiLang - a systems programming language with ownership, pattern matching, and direct kernel access.</p>
+                        <h3>💾 KiFS</h3>
+                        <p>Custom filesystem</p>
                     </div>
                 </div>
 
-                <h2 id="current-status">Current Status</h2>
-                <p>KiOS is in active development. Here's what's currently working:</p>
-
+                <h2 id="status">Current Status</h2>
                 <div class="table-wrapper">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Component</th>
-                                <th>Status</th>
-                                <th>Description</th>
-                            </tr>
+                            <tr><th>Component</th><th>Status</th></tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Bootloader</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>Limine v8.x, UEFI/BIOS</td>
-                            </tr>
-                            <tr>
-                                <td>GDT</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>64-bit segments</td>
-                            </tr>
-                            <tr>
-                                <td>IDT</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>Interrupt handling</td>
-                            </tr>
-                            <tr>
-                                <td>Physical Memory</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>Bitmap allocator</td>
-                            </tr>
-                            <tr>
-                                <td>Heap</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>Dynamic allocation</td>
-                            </tr>
-                            <tr>
-                                <td>Keyboard</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>PS/2 driver</td>
-                            </tr>
-                            <tr>
-                                <td>Framebuffer</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>Direct video output</td>
-                            </tr>
-                            <tr>
-                                <td>Terminal</td>
-                                <td><span class="status status-complete">Complete</span></td>
-                                <td>Shell with commands</td>
-                            </tr>
-                            <tr>
-                                <td>VMM</td>
-                                <td><span class="status status-inprogress">In Progress</span></td>
-                                <td>Virtual memory</td>
-                            </tr>
-                            <tr>
-                                <td>Syscalls</td>
-                                <td><span class="status status-inprogress">In Progress</span></td>
-                                <td>Kernel API</td>
-                            </tr>
-                            <tr>
-                                <td>AHCI Driver</td>
-                                <td><span class="status status-todo">Todo</span></td>
-                                <td>Storage access</td>
-                            </tr>
-                            <tr>
-                                <td>KiFS</td>
-                                <td><span class="status status-todo">Todo</span></td>
-                                <td>Filesystem</td>
-                            </tr>
-                            <tr>
-                                <td>KiLang</td>
-                                <td><span class="status status-todo">Todo</span></td>
-                                <td>Programming language</td>
-                            </tr>
-                            <tr>
-                                <td>GUI</td>
-                                <td><span class="status status-todo">Todo</span></td>
-                                <td>Graphical interface</td>
-                            </tr>
+                            <tr><td>Bootloader</td><td><span class="status status-complete">Complete</span></td></tr>
+                            <tr><td>PMM</td><td><span class="status status-complete">Complete</span></td></tr>
+                            <tr><td>Framebuffer</td><td><span class="status status-complete">Complete</span></td></tr>
+                            <tr><td>Keyboard</td><td><span class="status status-complete">Complete</span></td></tr>
+                            <tr><td>VMM</td><td><span class="status status-inprogress">In Progress</span></td></tr>
+                            <tr><td>Syscalls</td><td><span class="status status-inprogress">In Progress</span></td></tr>
                         </tbody>
                     </table>
                 </div>
 
-                <h2 id="goals">Project Goals</h2>
-                <p>The ultimate goal is a fully autonomous operating system that can compile itself (self-hosting):</p>
-
-                <ol class="goals-list">
-                    <li>
-                        <strong>Phase 1:</strong> Basic system (boot, memory, I/O) — ✅ Complete
-                    </li>
-                    <li>
-                        <strong>Phase 2:</strong> Virtualization & protection (VMM, syscalls) — 🔄 In Progress
-                    </li>
-                    <li>
-                        <strong>Phase 3:</strong> Storage & filesystem (AHCI, KiFS) — 📋 Planned
-                    </li>
-                    <li>
-                        <strong>Phase 4:</strong> Graphics (Display server, GUI) — 📋 Planned
-                    </li>
-                    <li>
-                        <strong>Phase 5:</strong> Executable format (KiELF) — 📋 Planned
-                    </li>
-                    <li>
-                        <strong>Phase 6:</strong> Userspace applications — 📋 Planned
-                    </li>
-                    <li>
-                        <strong>Phase 7:</strong> KiLang language — 📋 Planned
-                    </li>
-                    <li>
-                        <strong>Phase 8:</strong> Self-hosting — 📋 Planned
-                    </li>
-                </ol>
-
                 <h2 id="get-started">Get Started</h2>
-                <p>Ready to try KiOS? Check out our quick start guide:</p>
-
                 <div class="code-block">
-                    <div class="code-header">
-                        <span class="code-lang">Bash</span>
-                    </div>
-                    <pre><code># Clone the repository
-git clone https://github.com/Lucifer04ka/KiOS.git
+                    <div class="code-header"><span class="code-lang">Bash</span></div>
+                    <pre><code>git clone https://github.com/Lucifer04ka/KiOS.git
 cd KiOS
-
-# Build the kernel
 make
-
-# Run in QEMU
 make run</code></pre>
-                </div>
-
-                <h2 id="contribute">Contribute</h2>
-                <p>KiOS is an open-source project. Contributions are welcome! Check out our GitHub repository for more information.</p>
-
-                <div class="note-callout">
-                    <span class="callout-icon">📝</span>
-                    <div class="callout-content">
-                        <strong>Note:</strong> See the <a href="roadmap.html">Roadmap</a> for a detailed development plan.
-                    </div>
                 </div>
             </article>
         </main>
     </div>
 
-    <script src="js/main.js"></script>
+    <script>
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+    </script>
 </body>
 </html>

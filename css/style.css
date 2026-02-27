@@ -108,6 +108,16 @@ a:hover {
     justify-content: space-between;
 }
 
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--color-fg-default);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -542,12 +552,12 @@ tr:hover td {
         font-size: 20px;
     }
     
-    .top-nav {
-        display: none;
+    .mobile-menu-btn {
+        display: block;
     }
     
-    .mobile-menu-btn {
-        display: flex !important;
+    .top-nav {
+        display: none;
     }
 }
     
