@@ -1,58 +1,50 @@
-// KiOS Documentation - JavaScript
-// GitHub Docs Style
+// KiOS Documentation - Mobile Menu
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Add smooth animations
-    const article = document.querySelector('.article');
-    if (article) {
-        article.style.opacity = '0';
-        article.style.transform = 'translateY(10px)';
-        article.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    // Add mobile menu button
+    const header = document.querySelector('.site-header');
+    if (header) {
+        const menuBtn = document.createElement('button');
+        menuBtn.className = 'mobile-menu-btn';
+        menuBtn.innerHTML = '☰';
+        menuBtn.setAttribute('aria-label', 'Toggle menu');
+        menuBtn.style.cssText = `
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--color-fg-default);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px 12px;
+        `;
+        header.querySelector('.header-content').appendChild(menuBtn);
         
-        setTimeout(() => {
-            article.style.opacity = '1';
-            article.style.transform = 'translateY(0)';
-        }, 50);
+        menuBtn.addEventListener('click', () => {
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar) {
+                sidebar.classList.toggle('open');
+            }
+        });
     }
     
-    // Mobile menu toggle
-    const createMobileMenu = () => {
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
         const sidebar = document.querySelector('.sidebar');
-        
-        if (window.innerWidth <= 768 && !document.querySelector('.mobile-toggle')) {
-            const toggle = document.createElement('button');
-            toggle.className = 'mobile-toggle';
-            toggle.innerHTML = '☰ Menu';
-            toggle.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 20px;
-                background: var(--color-accent-bg);
-                color: white;
-                border: none;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: 500;
-                cursor: pointer;
-                z-index: 1000;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            `;
-            
-            toggle.addEventListener('click', () => {
-                sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
-            });
-            
-            document.body.appendChild(toggle);
-        } else if (window.innerWidth > 768) {
-            const toggle = document.querySelector('.mobile-toggle');
-            if (toggle) toggle.remove();
-            if (sidebar) sidebar.style.display = 'block';
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        if (sidebar && sidebar.classList.contains('open')) {
+            if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                sidebar.classList.remove('open');
+            }
         }
-    };
+    });
     
-    createMobileMenu();
-    window.addEventListener('resize', createMobileMenu);
+    // Handle resize
+    window.addEventListener('resize', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (window.innerWidth > 768 && sidebar) {
+            sidebar.classList.remove('open');
+        }
+    });
 });
 
-console.log('⚙️ KiOS Documentation loaded');
+console.log('KiOS Docs loaded');
