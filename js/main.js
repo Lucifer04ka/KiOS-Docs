@@ -1,82 +1,58 @@
-// ========================================
 // KiOS Documentation - JavaScript
-// ========================================
+// GitHub Docs Style
 
-// Копирование кода в буфер обмена
-function copyCode(button) {
-    const codeBlock = button.closest('.code-block');
-    const code = codeBlock.querySelector('code').textContent;
-    
-    navigator.clipboard.writeText(code).then(() => {
-        const originalText = button.textContent;
-        button.textContent = '✅ Скопировано!';
-        button.style.color = 'var(--accent-green)';
-        
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.color = '';
-        }, 2000);
-    });
-}
-
-// Мобильное меню (для будущего использования)
-function toggleMobileMenu() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('mobile-open');
-}
-
-// Подсветка активного пункта меню
-function setActiveNavItem() {
-    const currentPath = window.location.pathname;
-    const navItems = document.querySelectorAll('.nav-item');
-    
-    navItems.forEach(item => {
-        if (item.getAttribute('href') === currentPath.split('/').pop()) {
-            item.classList.add('active');
-        }
-    });
-}
-
-// Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', () => {
-    setActiveNavItem();
-    
-    // Добавляем классы для анимации
-    const cards = document.querySelectorAll('.feature-card, .doc-card, .phase-card');
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(10px)';
+    // Add smooth animations
+    const article = document.querySelector('.article');
+    if (article) {
+        article.style.opacity = '0';
+        article.style.transform = 'translateY(10px)';
+        article.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
         
         setTimeout(() => {
-            card.style.transition = 'all 0.3s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 50);
-    });
-});
-
-// Обработка горячих клавиш
-document.addEventListener('keydown', (e) => {
-    // Ctrl/Cmd + K для поиска (будущее)
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        // Можно добавить поиск
+            article.style.opacity = '1';
+            article.style.transform = 'translateY(0)';
+        }, 50);
     }
-});
-
-// Плавная прокрутка для якорных ссылок
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+    
+    // Mobile menu toggle
+    const createMobileMenu = () => {
+        const sidebar = document.querySelector('.sidebar');
+        
+        if (window.innerWidth <= 768 && !document.querySelector('.mobile-toggle')) {
+            const toggle = document.createElement('button');
+            toggle.className = 'mobile-toggle';
+            toggle.innerHTML = '☰ Menu';
+            toggle.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                background: var(--color-accent-bg);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            `;
+            
+            toggle.addEventListener('click', () => {
+                sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
             });
+            
+            document.body.appendChild(toggle);
+        } else if (window.innerWidth > 768) {
+            const toggle = document.querySelector('.mobile-toggle');
+            if (toggle) toggle.remove();
+            if (sidebar) sidebar.style.display = 'block';
         }
-    });
+    };
+    
+    createMobileMenu();
+    window.addEventListener('resize', createMobileMenu);
 });
 
-// Тёмная тема уже по умолчанию (CSS handles it)
-console.log('📘 KiOS Documentation loaded');
+console.log('⚙️ KiOS Documentation loaded');

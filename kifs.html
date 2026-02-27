@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiFS — KiOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">KiOS</span>
+            </a>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Docs</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Documentation</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="nav-group-title">Getting Started</span>
+                    <a href="index.html" class="nav-item">Introduction</a>
+                    <a href="quick-start.html" class="nav-item">Quick Start</a>
+                    <a href="installation.html" class="nav-item">Installation</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Architecture</span>
+                    <a href="overview.html" class="nav-item">Overview</a>
+                    <a href="kernel.html" class="nav-item">Kernel</a>
+                    <a href="memory.html" class="nav-item">Memory Management</a>
+                    <a href="syscalls.html" class="nav-item">System Calls</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Development</span>
+                    <a href="roadmap.html" class="nav-item">Roadmap</a>
+                    <a href="contributing.html" class="nav-item">Contributing</a>
+                </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">Future Plans</span>
+                    <a href="kilang.html" class="nav-item">KiLang</a>
+                    <a href="file-formats.html" class="nav-item">File Formats</a>
+                    <a href="kifs.html" class="nav-item active">KiFS</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <article class="article">
+                <h1>KiFS — KiOS File System</h1>
+                <p class="lead">KiFS (KiOS File System) is a custom journaling filesystem designed for KiOS.</p>
+
+                <div class="warning-callout">
+                    <span class="callout-icon">🔮</span>
+                    <div class="callout-content">
+                        <strong>Planned:</strong> KiFS will be implemented in Phase 3 of development.
+                    </div>
+                </div>
+
+                <h2 id="overview">Overview</h2>
+                <p>KiFS is designed with the following goals:</p>
+                <ul>
+                    <li><strong>Journaling:</strong> Crash recovery without data loss</li>
+                    <li><strong>Performance:</strong> Optimized for HDD/SSD on Lenovo G580</li>
+                    <li><strong>Simplicity:</strong> Clean, understandable on-disk structure</li>
+                    <li><strong>Permissions:</strong> Unix-style rwx permissions</li>
+                </ul>
+
+                <h2 id="structure">On-Disk Structure</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>Superblock</h3>
+                        <p>1KB metadata about the filesystem: size, block count, free space, UUID</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Inode Table</h3>
+                        <p>Array of 256-byte inode structures for files and directories</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Journal</h3>
+                        <p>Write-ahead logging for crash recovery</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Data Blocks</h4>
+                        <p>Actual file content storage</p>
+                    </div>
+                </div>
+
+                <h2 id="superblock">Superblock Format</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Magic</td>
+                                <td>uint32_t</td>
+                                <td>0x4B465332 ("KFS2")</td>
+                            </tr>
+                            <tr>
+                                <td>Version</td>
+                                <td>uint16_t</td>
+                                <td>Filesystem version</td>
+                            </tr>
+                            <tr>
+                                <td>Block Size</td>
+                                <td>uint16_t</td>
+                                <td>512, 1024, 2048, or 4096</td>
+                            </tr>
+                            <tr>
+                                <td>Block Count</td>
+                                <td>uint32_t</td>
+                                <td>Total blocks</td>
+                            </tr>
+                            <tr>
+                                <td>Inode Count</td>
+                                <td>uint32_t</td>
+                                <td>Total inodes</td>
+                            </tr>
+                            <tr>
+                                <td>Free Blocks</td>
+                                <td>uint32_t</td>
+                                <td>Available blocks</td>
+                            </tr>
+                            <tr>
+                                <td>UUID</td>
+                                <td>uint8_t[16]</td>
+                                <td>Filesystem UUID</td>
+                            </tr>
+                            <tr>
+                                <td>Label</td>
+                                <td>char[64]</td>
+                                <td>Volume label</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="inode">Inode Structure</h2>
+                <p>Each file or directory is represented by a 256-byte inode:</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mode</td>
+                                <td>uint16_t</td>
+                                <td>File type + permissions (rwxrwxrwx)</td>
+                            </tr>
+                            <tr>
+                                <td>UID</td>
+                                <td>uint16_t</td>
+                                <td>Owner user ID</td>
+                            </tr>
+                            <tr>
+                                <td>Size</td>
+                                <td>uint32_t</td>
+                                <td>File size in bytes</td>
+                            </tr>
+                            <tr>
+                                <td>ATime</td>
+                                <td>uint32_t</td>
+                                <td>Last access time</td>
+                            </tr>
+                            <tr>
+                                <td>MTime</td>
+                                <td>uint32_t</td>
+                                <td>Last modify time</td>
+                            </tr>
+                            <tr>
+                                <td>CTime</td>
+                                <td>uint32_t</td>
+                                <td>Last change time</td>
+                            </tr>
+                            <tr>
+                                <td>GID</td>
+                                <td>uint32_t</td>
+                                <td>Group ID</td>
+                            </tr>
+                            <tr>
+                                <td>Links</td>
+                                <td>uint32_t</td>
+                                <td>Hard link count</td>
+                            </tr>
+                            <tr>
+                                <td>Direct Blocks</td>
+                                <td>uint32_t[12]</td>
+                                <td>Direct block pointers</td>
+                            </tr>
+                            <tr>
+                                <td>Indirect</td>
+                                <td>uint32_t</td>
+                                <td>Single indirect block</td>
+                            </tr>
+                            <tr>
+                                <td>Double Indirect</td>
+                                <td>uint32_t</td>
+                                <td>Double indirect block</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="modes">File Types</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mode</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0x1000</td>
+                                <td>Socket</td>
+                            </tr>
+                            <tr>
+                                <td>0x2000</td>
+                                <td>Symbolic Link</td>
+                            </tr>
+                            <tr>
+                                <td>0x4000</td>
+                                <td>Directory</td>
+                            </tr>
+                            <tr>
+                                <td>0x6000</td>
+                                <td>Block Device</td>
+                            </tr>
+                            <tr>
+                                <td>0x8000</td>
+                                <td>Regular File</td>
+                            </tr>
+                            <tr>
+                                <td>0xA000</td>
+                                <td>Character Device</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="permissions">Permissions</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bit</th>
+                                <th>Permission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0400</td>
+                                <td>Owner read</td>
+                            </tr>
+                            <tr>
+                                <td>0200</td>
+                                <td>Owner write</td>
+                            </tr>
+                            <tr>
+                                <td>0100</td>
+                                <td>Owner execute</td>
+                            </tr>
+                            <tr>
+                                <td>0040</td>
+                                <td>Group read</td>
+                            </tr>
+                            <tr>
+                                <td>0020</td>
+                                <td>Group write</td>
+                            </tr>
+                            <tr>
+                                <td>0010</td>
+                                <td>Group execute</td>
+                            </tr>
+                            <tr>
+                                <td>0004</td>
+                                <td>Others read</td>
+                            </tr>
+                            <tr>
+                                <td>0002</td>
+                                <td>Others write</td>
+                            </tr>
+                            <tr>
+                                <td>0001</td>
+                                <td>Others execute</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="operations">Supported Operations</h2>
+                <ul>
+                    <li><strong>Create:</strong> Create new files and directories</li>
+                    <li><strong>Read:</strong> Read file content</li>
+                    <li><strong>Write:</strong> Write/modify file content</li>
+                    <li><strong>Delete:</strong> Remove files</li>
+                    <li><strong>Rename:</strong> Rename files and directories</li>
+                    <li><strong>Link:</strong> Create hard links</li>
+                    <li><strong>Symlink:</strong> Create symbolic links</li>
+                </ul>
+            </article>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

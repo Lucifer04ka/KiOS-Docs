@@ -3,243 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📘 KiOS Documentation</title>
+    <title>KiOS — Documentation</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
 </head>
 <body>
-    <nav class="sidebar">
-        <div class="logo">
-            <span class="logo-icon">🖥️</span>
-            <span class="logo-text">KiOS</span>
-            <span class="logo-version">Project</span>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">KiOS</span>
+            </a>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link active">Docs</a>
+                <a href="roadmap.html" class="nav-link">Roadmap</a>
+                <a href="https://github.com/Lucifer04ka/KiOS" class="nav-link" target="_blank">GitHub</a>
+            </nav>
         </div>
-        
-        <div class="nav-section">
-            <div class="nav-title">📚 Документация</div>
-            <a href="index.html" class="nav-item active">
-                <span class="nav-icon">🏠</span> Главная
-            </a>
-            <a href="manifest.html" class="nav-item">
-                <span class="nav-icon">📋</span> Манифест
-            </a>
-            <a href="roadmap.html" class="nav-item">
-                <span class="nav-icon">🗺️</span> Дорожная карта
-            </a>
-            <a href="structure.html" class="nav-item">
-                <span class="nav-icon">📁</span> Структура проекта
-            </a>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-title">⚙️ Техническая</div>
-            <a href="file-formats.html" class="nav-item">
-                <span class="nav-icon">📄</span> Форматы файлов
-            </a>
-            <a href="kilang.html" class="nav-item">
-                <span class="nav-icon">🔤</span> KiLang
-            </a>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-title">🔗 Ссылки</div>
-            <a href="https://github.com" class="nav-item" target="_blank">
-                <span class="nav-icon">🐙</span> GitHub
-            </a>
-            <a href="https://discord.com/invite/clawd" class="nav-item" target="_blank">
-                <span class="nav-icon">💬</span> Discord
-            </a>
-        </div>
-        
-        <div class="nav-footer">
-            <div class="status">
-                <span class="status-dot"></span>
-                <span>В разработке</span>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Documentation</span>
             </div>
-        </div>
-    </nav>
-    
-    <main class="content">
-        <header class="page-header">
-            <div class="breadcrumb">
-                <a href="index.html">Главная</a>
-                <span class="separator">›</span>
-                <span class="current">Документация KiOS</span>
-            </div>
-        </header>
-        
-        <div class="hero">
-            <div class="hero-badge">🛠️ В разработке</div>
-            <h1>Документация <span class="highlight">KiOS</span></h1>
-            <p class="hero-subtitle">Полная экосистема независимой операционной системы</p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">9</span>
-                    <span class="stat-label">Фаз</span>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="nav-group-title">Getting Started</span>
+                    <a href="index.html" class="nav-item">Introduction</a>
+                    <a href="quick-start.html" class="nav-item">Quick Start</a>
+                    <a href="installation.html" class="nav-item">Installation</a>
                 </div>
-                <div class="stat">
-                    <span class="stat-number">∞</span>
-                    <span class="stat-label">Возможностей</span>
+                <div class="nav-group">
+                    <span class="nav-group-title">Architecture</span>
+                    <a href="overview.html" class="nav-item">Overview</a>
+                    <a href="kernel.html" class="nav-item">Kernel</a>
+                    <a href="memory.html" class="nav-item">Memory Management</a>
+                    <a href="syscalls.html" class="nav-item">System Calls</a>
                 </div>
-                <div class="stat">
-                    <span class="stat-number">1</span>
-                    <span class="stat-label">Цель</span>
+                <div class="nav-group">
+                    <span class="nav-group-title">Development</span>
+                    <a href="roadmap.html" class="nav-item">Roadmap</a>
+                    <a href="contributing.html" class="nav-item">Contributing</a>
                 </div>
-            </div>
-        </div>
-        
-        <section class="features">
-            <h2>🚀 Что такое KiOS?</h2>
-            <p>KiOS — это вертикально-интегрированная экосистема, разработанная с нуля:</p>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">💾</div>
-                    <h3>Ядро</h3>
-                    <p>64-битное микроядро на C/ASM с поддержкой виртуальной памяти</p>
+                <div class="nav-group">
+                    <span class="nav-group-title">Future Plans</span>
+                    <a href="kilang.html" class="nav-item">KiLang</a>
+                    <a href="file-formats.html" class="nav-item">File Formats</a>
+                    <a href="kifs.html" class="nav-item">KiFS</a>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔤</div>
-                    <h3>KiLang</h3>
-                    <p>Собственный язык программирования с системой владения</p>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <article class="article">
+                <h1>Introduction</h1>
+                <p class="lead">KiOS is an independent 64-bit operating system developed from scratch, aiming for Windows XP-level functionality.</p>
+
+                <div class="warning-callout">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content">
+                        <strong>Warning:</strong> KiOS is currently in early development. Many features are not yet implemented.
+                    </div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📦</div>
-                    <h3>Форматы</h3>
-                    <p>Проприетарные бинарные форматы: .kelf, .kfs, .ktx, .kimg</p>
+
+                <h2 id="overview">Overview</h2>
+                <p>KiOS is a vertically-integrated computing environment designed with full control from transistors to high-level syntax. The project goal is complete autonomy:</p>
+
+                <ul>
+                    <li><strong>Kernel:</strong> 64-bit microkernel on C/ASM</li>
+                    <li><strong>Language:</strong> Custom programming language KiLang</li>
+                    <li><strong>File Formats:</strong> Proprietary binary formats</li>
+                    <li><strong>Filesystem:</strong> KiFS (KiOS File System)</li>
+                    <li><strong>Graphics:</strong> Native graphics server</li>
+                </ul>
+
+                <h2 id="features">Key Features</h2>
+
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>🖥️ Microkernel Architecture</h3>
+                        <p>Lightweight kernel with minimal code running in privileged mode. Device drivers run in userspace.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🔒 Memory Protection</h3>
+                        <p>Virtual memory management with 4-level paging (PML4 → PDPT → PD → PT). Kernel and user space separation.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>💾 Custom Filesystem</h3>
+                        <p>KiFS (KiOS File System) with journaling, permissions, and optimized for HDD/SSD.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🔤 Native Language</h3>
+                        <p>KiLang - a systems programming language with ownership, pattern matching, and direct kernel access.</p>
+                    </div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">💿</div>
-                    <h3>KiFS</h3>
-                    <p>Собственная файловая система с журналированием</p>
+
+                <h2 id="current-status">Current Status</h2>
+                <p>KiOS is in active development. Here's what's currently working:</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bootloader</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>Limine v8.x, UEFI/BIOS</td>
+                            </tr>
+                            <tr>
+                                <td>GDT</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>64-bit segments</td>
+                            </tr>
+                            <tr>
+                                <td>IDT</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>Interrupt handling</td>
+                            </tr>
+                            <tr>
+                                <td>Physical Memory</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>Bitmap allocator</td>
+                            </tr>
+                            <tr>
+                                <td>Heap</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>Dynamic allocation</td>
+                            </tr>
+                            <tr>
+                                <td>Keyboard</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>PS/2 driver</td>
+                            </tr>
+                            <tr>
+                                <td>Framebuffer</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>Direct video output</td>
+                            </tr>
+                            <tr>
+                                <td>Terminal</td>
+                                <td><span class="status status-complete">Complete</span></td>
+                                <td>Shell with commands</td>
+                            </tr>
+                            <tr>
+                                <td>VMM</td>
+                                <td><span class="status status-inprogress">In Progress</span></td>
+                                <td>Virtual memory</td>
+                            </tr>
+                            <tr>
+                                <td>Syscalls</td>
+                                <td><span class="status status-inprogress">In Progress</span></td>
+                                <td>Kernel API</td>
+                            </tr>
+                            <tr>
+                                <td>AHCI Driver</td>
+                                <td><span class="status status-todo">Todo</span></td>
+                                <td>Storage access</td>
+                            </tr>
+                            <tr>
+                                <td>KiFS</td>
+                                <td><span class="status status-todo">Todo</span></td>
+                                <td>Filesystem</td>
+                            </tr>
+                            <tr>
+                                <td>KiLang</td>
+                                <td><span class="status status-todo">Todo</span></td>
+                                <td>Programming language</td>
+                            </tr>
+                            <tr>
+                                <td>GUI</td>
+                                <td><span class="status status-todo">Todo</span></td>
+                                <td>Graphical interface</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🖼️</div>
-                    <h3>Графика</h3>
-                    <p>Нативный графический сервер и Desktop Environment</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Self-Hosting</h3>
-                    <p>KiOS компилирует сама себя</p>
-                </div>
-            </div>
-        </section>
-        
-        <section class="quick-start">
-            <h2>⚡ Быстрый старт</h2>
-            <div class="code-block">
-                <div class="code-header">
-                    <span class="code-lang">Bash</span>
-                    <button class="copy-btn" onclick="copyCode(this)">📋 Копировать</button>
-                </div>
-                <pre><code># Клонирование репозитория
-git clone &lt;repo&gt; KiOS
+
+                <h2 id="goals">Project Goals</h2>
+                <p>The ultimate goal is a fully autonomous operating system that can compile itself (self-hosting):</p>
+
+                <ol class="goals-list">
+                    <li>
+                        <strong>Phase 1:</strong> Basic system (boot, memory, I/O) — ✅ Complete
+                    </li>
+                    <li>
+                        <strong>Phase 2:</strong> Virtualization & protection (VMM, syscalls) — 🔄 In Progress
+                    </li>
+                    <li>
+                        <strong>Phase 3:</strong> Storage & filesystem (AHCI, KiFS) — 📋 Planned
+                    </li>
+                    <li>
+                        <strong>Phase 4:</strong> Graphics (Display server, GUI) — 📋 Planned
+                    </li>
+                    <li>
+                        <strong>Phase 5:</strong> Executable format (KiELF) — 📋 Planned
+                    </li>
+                    <li>
+                        <strong>Phase 6:</strong> Userspace applications — 📋 Planned
+                    </li>
+                    <li>
+                        <strong>Phase 7:</strong> KiLang language — 📋 Planned
+                    </li>
+                    <li>
+                        <strong>Phase 8:</strong> Self-hosting — 📋 Planned
+                    </li>
+                </ol>
+
+                <h2 id="get-started">Get Started</h2>
+                <p>Ready to try KiOS? Check out our quick start guide:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Bash</span>
+                    </div>
+                    <pre><code># Clone the repository
+git clone https://github.com/Lucifer04ka/KiOS.git
 cd KiOS
 
-# Сборка ядра
+# Build the kernel
 make
 
-# Запуск в QEMU
-make run
+# Run in QEMU
+make run</code></pre>
+                </div>
 
-# Создание ISO
-make iso</code></pre>
-            </div>
-        </section>
-        
-        <section class="docs-preview">
-            <h2>📖 Разделы документации</h2>
-            
-            <div class="docs-grid">
-                <a href="manifest.html" class="doc-card">
-                    <div class="doc-icon">📋</div>
-                    <div class="doc-content">
-                        <h3>Технический манифест</h3>
-                        <p>Обзор архитектуры, целей и стека технологий</p>
+                <h2 id="contribute">Contribute</h2>
+                <p>KiOS is an open-source project. Contributions are welcome! Check out our GitHub repository for more information.</p>
+
+                <div class="note-callout">
+                    <span class="callout-icon">📝</span>
+                    <div class="callout-content">
+                        <strong>Note:</strong> See the <a href="roadmap.html">Roadmap</a> for a detailed development plan.
                     </div>
-                    <div class="doc-arrow">→</div>
-                </a>
-                
-                <a href="roadmap.html" class="doc-card">
-                    <div class="doc-icon">🗺️</div>
-                    <div class="doc-content">
-                        <h3>Дорожная карта</h3>
-                        <p>9 фаз развития от ядра до самокомпиляции</p>
-                    </div>
-                    <div class="doc-arrow">→</div>
-                </a>
-                
-                <a href="structure.html" class="doc-card">
-                    <div class="doc-icon">📁</div>
-                    <div class="doc-content">
-                        <h3>Структура проекта</h3>
-                        <p>Организация файлов и директорий</p>
-                    </div>
-                    <div class="doc-arrow">→</div>
-                </a>
-                
-                <a href="file-formats.html" class="doc-card">
-                    <div class="doc-icon">📄</div>
-                    <div class="doc-content">
-                        <h3>Форматы файлов</h3>
-                        <p>Спецификации .kelf, .kfs, .ktx, .kimg</p>
-                    </div>
-                    <div class="doc-arrow">→</div>
-                </a>
-                
-                <a href="kilang.html" class="doc-card">
-                    <div class="doc-icon">🔤</div>
-                    <div class="doc-content">
-                        <h3>Спецификация KiLang</h3>
-                        <p>Синтаксис, типы, стандартная библиотека</p>
-                    </div>
-                    <div class="doc-arrow">→</div>
-                </a>
-            </div>
-        </section>
-        
-        <section class="current-phase">
-            <h2>📍 Текущая фаза</h2>
-            <div class="phase-card">
-                <div class="phase-badge">🟢</div>
-                <div class="phase-info">
-                    <h3>Фаза 1: Базовая система</h3>
-                    <p>Завершено: GDT, IDT, PIC, Long Mode, PMM, Heap, Keyboard, Framebuffer, Terminal</p>
                 </div>
-                <div class="phase-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%"></div>
-                    </div>
-                    <span>100%</span>
-                </div>
-            </div>
-            
-            <div class="phase-card next">
-                <div class="phase-badge">🟡</div>
-                <div class="phase-info">
-                    <h3>Фаза 2: Виртуализация и Защита</h3>
-                    <p>Следующая: VMM, Syscalls, Memory Protection</p>
-                </div>
-                <div class="phase-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <span>0%</span>
-                </div>
-            </div>
-        </section>
-        
-        <footer class="page-footer">
-            <p>📅 Обновлено: 2026-02-27 | KiOS Project — Полный контроль от транзистора до синтаксиса</p>
-        </footer>
-    </main>
-    
+            </article>
+        </main>
+    </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>
